@@ -1,0 +1,70 @@
+﻿<html xmlns:th="http://www.thymeleaf.org">
+  <head th:insert="~{fragments::head}">
+  </head>
+<body>
+<div id="header">
+<div class="container">
+<div id="welcomeLine" class="row">
+	<div class="span6">Bienvenue !<strong th:if="${utilisateur}!=null" th:text="' '+${utilisateur.prenom}"> User </strong></div>
+</div>
+<!-- Navbar ================================================== -->
+<div id="logoArea" class="navbar" th:insert="~{fragments::navbar}">
+
+</div>
+</div>
+</div>
+
+<div id="mainBody">
+	<div class="container">
+		<h3>Bienvenue sur le site de l'association IcISA cultive! Sélectionnez votre article et suivez les instructions afin de finaliser la commande.</h3>
+	<div class="row">
+
+		<div class="span9">
+			<div class="well well-small">
+			<h4>Produits disponibles </h4>
+			<div class="row-fluid">
+			<div id="featured" class="carousel slide">
+			<div class="carousel-inner">
+			  <div class="item active">
+			  <ul class="thumbnails">
+
+				<!-- ARTICLE INDIVIDUEL -->
+				<li th:each="panier : ${listPanier}" class="span3">
+				  <div class="thumbnail">
+					<a th:href=" 'details?idPanier='+${panier.id}"><!--<img src="../../themes/images/products/b2.jpg" alt="">--></a>
+					<div class="caption">
+					  <h5 th:text="${panier.typepanier}">Type panier</h5>
+					  <h4><a class="btn" th:href=" 'details?idPanier='+${panier.id}">Choisir</a></h4>
+					</div>
+				  </div>
+				</li>
+			  </ul>
+			  </div>
+
+
+			  </div>
+			  </div>
+		</div>
+
+
+		</div>
+		</div>
+	</div>
+</div>
+</div>
+<!-- Footer ================================================================== -->
+	<div  id="footerSection" th:insert="~{fragments::footer}">
+<!-- Container End -->
+	</div>
+<!-- Placed at the end of the document so the pages load faster ============================================= -->
+	<script src="themes/js/jquery.js" type="text/javascript"></script>
+	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="themes/js/google-code-prettify/prettify.js"></script>
+	
+	<script src="themes/js/bootshop.js"></script>
+    <script src="themes/js/jquery.lightbox-0.5.js"></script>
+	
+	<!-- Themes switcher section ============================================================================================= -->
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:insert="~{fragments::head}">
+  </head>
+<body>
+<div id="header">
+<div class="container">
+<div id="welcomeLine" class="row">
+	<div class="span6">Welcome!<strong> User</strong></div>
+	<div class="span6">
+	<div class="pull-right">
+		<a href="product_summary.html"><span class="">Fr</span></a>
+		<a href="product_summary.html"><span class="">Es</span></a>
+		<span class="btn btn-mini">En</span>
+		<a href="product_summary.html"><span>&pound;</span></a>
+		<span class="btn btn-mini">$155.00</span>
+		<a href="product_summary.html"><span class="">$</span></a>
+		<a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a> 
+	</div>
+	</div>
+</div>
+<!-- Navbar ================================================== -->
+<div id="logoArea" class="navbar" th:insert="~{fragments::navbar}">
+
+</div>
+</div>
+</div>
+<!-- Header End====================================================================== -->
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="index">Accueil</a> <span class="divider">/</span></li>
+		<li class="active">Se connecter</li>
+    </ul>
+	<h3> Se connecter </h3>
+	<hr class="soft"/>
+		<a href="enregistrement"><h5>Pas encore de compte?</h5></a>
+															<!-- LOGIN -->
+	<div class="row">
+
+		<div class="span4">
+			<div class="well">
+				<h5 th:if="${messageErreur}!=null" th:text="${messageErreur.getMessage()}" style="color: red">Message d'erreur</h5>
+
+									<!-- CONNEXION -->
+			<form method="post" action="login">
+			  <div class="control-group">
+				<label class="control-label" for="inputEmail1">Email</label>
+				<div class="controls">
+				  <input class="span3"  type="text" id="inputEmail1" name="inputEmail1" placeholder="Email">
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="inputPassword1">Mot de passe</label>
+				<div class="controls">
+				  <input type="password" class="span3"  id="inputPassword1" name="inputPassword1" placeholder="Mot de passe">
+				</div>
+				  <div class="controls">
+					  <button type="submit" class="btn block">Se connecter</button>
+				  </div>
+			  </div>
+			</form>
+		</div>
+		</div>
+	</div>	
+	
+</div>
+</div></div>
+</div>
+<!-- MainBody End ============================= -->
+<!-- Footer ================================================================== -->
+	<div  id="footerSection" th:insert="~{fragments::footer}">
+	<!-- Container End -->
+	</div>
+<!-- Placed at the end of the document so the pages load faster ============================================= -->
+	
+	<!-- Themes switcher section ============================================================================================= -->
+</body>
+</html>
