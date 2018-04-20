@@ -20,6 +20,7 @@ public class PageAdminServlet extends GenericServlet {
         if (utilisateur!=null){
             if (utilisateur.isAdmin()){
                 WebContext context = new WebContext(req, resp, req.getServletContext());
+                context.setVariable("utilisateur", utilisateur);
 
                 TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
                 templateEngine.process("page_admin", context, resp.getWriter());;

@@ -20,6 +20,7 @@ public class MonProfilServlet extends GenericServlet {
         Utilisateur utilisateur = (Utilisateur) req.getSession().getAttribute("utilisateur");
         if (utilisateur!=null){
             WebContext context = new WebContext(req, resp, req.getServletContext());
+            context.setVariable("utilisateur", utilisateur);
 
             Integer id = utilisateur.getId();
 

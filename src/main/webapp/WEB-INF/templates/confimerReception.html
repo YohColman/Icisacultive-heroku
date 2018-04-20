@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments::head}">
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <div id="welcomeLine" class="row">
+            <div class="span6">Bienvenue !<strong th:if="${utilisateur}!=null" th:text="' '+${utilisateur.prenom}"> User </strong></div>
+        </div>
+        <!-- Navbar ================================================== -->
+        <div id="logoArea" class="navbar" th:insert="~{fragments::navbar}">
+
+        </div>
+    </div>
+</div>
+<div id="mainBody">
+    <div class="container">
+        <form method="POST">
+            <p>Êtes-vous sûr(e) de vouloir modifier le statut de ce panier à "Réceptionné"?</p><br/>
+            <input type="submit" value="Panier réceptionné"><br/><br/><br/>
+            <button><a href="listesCommandes">Retour à la liste</a></button>
+        </form>
+    </div>
+</div>
+</body>
+<!-- MainBody End ============================= -->
+<!-- Footer ================================================================== -->
+<div  id="footerSection" th:insert="~{fragments::footer}">
+    <!-- Container End -->
+</div>
+<!-- Placed at the end of the document so the pages load faster ============================================= -->
+<script src="themes/js/jquery.js" type="text/javascript"></script>
+<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="themes/js/google-code-prettify/prettify.js"></script>
+
+<script src="themes/js/bootshop.js"></script>
+<script src="themes/js/jquery.lightbox-0.5.js"></script>
+
+
+</html>

@@ -1,6 +1,7 @@
 package icisacultive.devweb.projet.servlets;
 
 import icisacultive.devweb.projet.entities.Commande;
+import icisacultive.devweb.projet.entities.Utilisateur;
 import icisacultive.devweb.projet.managers.CommandeLibrary;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -17,6 +18,14 @@ public class   ListeCommandesServlet extends GenericServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
+
+        Utilisateur utilisateur = (Utilisateur) req.getSession().getAttribute("utilisateur");
+        if (utilisateur != null) {
+            context.setVariable("utilisateur", utilisateur);
+        } else {
+            System.out.println("Aucun utilisateur enregistré dans la session");
+        }
+
         List<Commande> listCommandes = CommandeLibrary.getInstance().listCommandes();
         context.setVariable("listCommandes", listCommandes);
 

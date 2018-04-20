@@ -28,6 +28,28 @@ public class LigneDeCommandeDaoImpl implements LigneDeCommandeDao {
     }
 
     @Override
+    public List<LigneDeCommande> listLigneDeCommandeByDate(String date) {
+        String query = "SELECT * FROM lignedecommande INNER JOIN commande ON lignedecommande.idcommande=commande.idcommande INNER JOIN lot ON lot.idlot=commande.idlot INNER JOIN panier ON panier.idpanier=lot.idpanier INNER JOIN utilisateur ON commande.idutilisateur=utilisateur.idutilisateur WHERE lignedecommande.date=?";
+        List<LigneDeCommande> lstLigneDeCommandeByUserByCommande = new ArrayList<>();
+
+        try (
+                Connection connection = DataSourceProvider.getDataSource().getConnection();
+                PreparedStatement statement = connection.prepareStatement(query);
+        ){
+            statement.setString(1, date);
+            try (ResultSet resultSet = statement.executeQuery()){
+                while (resultSet.next()){
+                    lstLigneDeCommandeByUserByCommande.add(new LigneDeCommande(resultSet.getInt("idlignedecommande"), resultSet.getInt("receptionne"), resultSet.getInt("idcommande"), resultSet.getDate("date"), resultSet.getString("typepanier"), resultSet.getString("nom"), resultSet.getString("prenom")));
+                }
+            }
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lstLigneDeCommandeByUserByCommande;
+    }
+
+    @Override
     public List<LigneDeCommande> listLigneDeCommandeByUser(Integer idCommande) {
         String query = "SELECT * FROM lignedecommande INNER JOIN commande ON lignedecommande.idcommande=commande.idcommande INNER JOIN lot ON lot.idlot=commande.idlot INNER JOIN panier ON panier.idpanier=lot.idpanier WHERE commande.idcommande=?";
         List<LigneDeCommande> lstLigneDeCommandeByUserByCommande = new ArrayList<>();
@@ -85,7 +107,20 @@ public class LigneDeCommandeDaoImpl implements LigneDeCommandeDao {
 
     @Override
     public void choisirDateLigneDeCommande(Integer idLigneDeCommande, String date) {
-        String query = "UPDATE lignedecommande SET date="+date+" WHERE idlignedecommande=?;";
+        String query = "UPDATE lignedecommande SET date='"+date+"' WHERE idlignedecommande=?;";
+        try(Connection connection = icisacultive.devweb.projet.dao.impl.DataSourceProvider.getDataSource().getConnection();
+            java.sql.PreparedStatement stmt = connection.prepareStatement(query)){
+
+            stmt.setInt(1, idLigneDeCommande);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void changerStatutLigneDeCommande(Integer idLigneDeCommande) {
+        String query = "UPDATE lignedecommande SET receptionne=1 WHERE idlignedecommande=?;";
         try(Connection connection = icisacultive.devweb.projet.dao.impl.DataSourceProvider.getDataSource().getConnection();
             java.sql.PreparedStatement stmt = connection.prepareStatement(query)){
 

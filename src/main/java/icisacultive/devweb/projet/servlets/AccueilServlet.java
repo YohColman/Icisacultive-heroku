@@ -1,3 +1,6 @@
+/**
+ * Servlet gérant l'affichage de la page d'index
+ */
 package icisacultive.devweb.projet.servlets;
 
 import icisacultive.devweb.projet.entities.Panier;

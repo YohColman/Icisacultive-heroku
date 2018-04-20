@@ -27,6 +27,13 @@ public class DetailsLotPanierServlet extends GenericServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
+        Utilisateur utilisateur = (Utilisateur) req.getSession().getAttribute("utilisateur");
+        if (utilisateur != null) {
+            context.setVariable("utilisateur", utilisateur);
+        } else {
+            System.out.println("Aucun utilisateur enregistré dans la session");
+        }
+
         Integer idLotPanier = Integer.valueOf(req.getParameter("idLot"));
         LotPanier lotPanierEnQuestion = LotPanierLibrary.getInstance().getLotPanierById(idLotPanier);
         context.setVariable("lotPanier", lotPanierEnQuestion);

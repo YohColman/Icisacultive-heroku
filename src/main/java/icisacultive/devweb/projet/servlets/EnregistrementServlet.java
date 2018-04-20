@@ -20,6 +20,13 @@ public class EnregistrementServlet extends GenericServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
+        Utilisateur utilisateur = (Utilisateur) req.getSession().getAttribute("utilisateur");
+        if (utilisateur != null) {
+            context.setVariable("utilisateur", utilisateur);
+        } else {
+            System.out.println("Aucun utilisateur enregistré dans la session");
+        }
+
         MessageErreur messageErreur = (MessageErreur) req.getSession().getAttribute("messageErreur");
         if (messageErreur != null) {
             context.setVariable("messageErreur", messageErreur);

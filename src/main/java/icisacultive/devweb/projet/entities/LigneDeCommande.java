@@ -9,6 +9,8 @@ public class LigneDeCommande {
     private Integer idCommande;
     private Date date;
     private String typePanier;
+    private String nomUtilisateur;
+    private String prenomUtilisateur;
 
     public LigneDeCommande(Integer idLigneDeCommande, Integer receptionne, Integer idCommande, Date date) {
         this.idLigneDeCommande = idLigneDeCommande;
@@ -23,6 +25,32 @@ public class LigneDeCommande {
         this.idCommande = idCommande;
         this.date = date;
         this.typePanier=type;
+    }
+
+    public LigneDeCommande(Integer idLigneDeCommande, Integer receptionne, Integer idCommande, Date date, String typePanier, String nomUtilisateur, String prenomUtilisateur) {
+        this.idLigneDeCommande = idLigneDeCommande;
+        this.receptionne = receptionne;
+        this.idCommande = idCommande;
+        this.date = date;
+        this.typePanier = typePanier;
+        this.nomUtilisateur = nomUtilisateur;
+        this.prenomUtilisateur = prenomUtilisateur;
+    }
+
+    public String getNomUtilisateur() {
+        return nomUtilisateur;
+    }
+
+    public void setNomUtilisateur(String nomUtilisateur) {
+        this.nomUtilisateur = nomUtilisateur;
+    }
+
+    public String getPrenomUtilisateur() {
+        return prenomUtilisateur;
+    }
+
+    public void setPrenomUtilisateur(String prenomUtilisateur) {
+        this.prenomUtilisateur = prenomUtilisateur;
     }
 
     public String getTypePanier() {

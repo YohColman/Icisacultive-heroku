@@ -1,6 +1,10 @@
+/**
+ * Servlet gérant la logique de l'ajout d'une séance de distribution
+ */
 package icisacultive.devweb.projet.servlets;
 
 import icisacultive.devweb.projet.entities.SeanceDistribution;
+import icisacultive.devweb.projet.entities.Utilisateur;
 import icisacultive.devweb.projet.managers.SeanceDistributionLibrary;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -20,6 +24,13 @@ public class AjouterSeanceDistribServlet extends GenericServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
+
+        Utilisateur utilisateur = (Utilisateur) req.getSession().getAttribute("utilisateur");
+        if (utilisateur != null) {
+            context.setVariable("utilisateur", utilisateur);
+        } else {
+            System.out.println("Aucun utilisateur enregistré dans la session");
+        }
 
         List<SeanceDistribution> listSeanceDistribution = SeanceDistributionLibrary.getInstance().listSeanceDistribution();
         context.setVariable("listSeanceDistribution", listSeanceDistribution);
